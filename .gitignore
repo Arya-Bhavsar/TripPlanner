@@ -1,0 +1,66 @@
+# ========================
+# Python Backend
+# ========================
+backend/venv/
+backend/.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Environment
+backend/.env
+.env
+*.env.*
+
+# Build / distribution
+build/
+dist/
+*.egg-info/
+*.spec
+
+# Unit test / coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+
+# ========================
+# React Frontend
+# ========================
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp.*
+.cache/
+.next/
+out/
+coverage/
+frontend/.env
+.env
+*.env.*
+
+# ========================
+# OS Specific
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# Misc
+# ========================
+*.log
+*.tmp
+*.bak
+bank_statements/
+statement_storage
+notes.txt
