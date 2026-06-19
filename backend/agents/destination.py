@@ -1,10 +1,12 @@
 import asyncio
 import os
-from agents import Agent, Runner
+from agents import Agent, Runner, OpenAIConversationsSession
 from dotenv import load_dotenv
 
 load_dotenv()
 
+# NEED TO REFINE THE PROMPT TO PREVENT ASKING FOR EXPLICIT PREFERENCES OVER AND OVER AGAIN
+# ALSO NEED BETTER NATURAL LANGUAGE RESPONSES.
 dest_agent_instructions = """
 ### ROLE
 You are the Destination Agent, an expert travel matcher. Your sole purpose is to consider user travel preferences and recommend 3 to 5 specific geographic destinations that perfectly match their criteria.
@@ -31,8 +33,22 @@ destination_agent = Agent(
 )
 
 async def main() -> None:
-    result = await Runner.run(destination_agent, "I want to go on a trip during summer where I can relax with my family")
-    print(result.final_output)
+    session = OpenAIConversationsSession()
+
+    print("Hello, I am your personal travel agent. How can I help you?")
+    print("Type 'exit' to end the chat.")
+    while True:
+        user_prompt = input("\n[You]: ")
+        if user_prompt.lower() == "exit":
+            print("[Agent]: Safe travels!")
+            break
+
+        result = await Runner.run(
+            destination_agent, 
+            user_prompt,
+            session=session
+        )
+        print("[Agent]:", result.final_output)
 
 if __name__ == "__main__":
     asyncio.run(main())
