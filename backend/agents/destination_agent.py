@@ -9,6 +9,7 @@ dest_agent_instructions = """
 ### ROLE
 You are the Destination Agent, an expert travel matcher. 
 Your sole purpose is to consider user travel preferences and recommend 3 to 5 specific geographic destinations and help them narrow down to one that perfectly match their criteria.
+
 ### CRITICAL GUARDRAILS
 NEVER build daily itineraries, calculate specific budget breakdowns, or recommend specific hotels/flights. Only recommend cities, or countries.
 """
@@ -22,8 +23,7 @@ destination_agent = Agent(
 async def main() -> None:
     session = OpenAIConversationsSession()
 
-    print("Hello, I am your personal travel agent. How can I help you?")
-    print("Type 'exit' to end the chat.")
+    print("Hello, I am your personal travel agent. How can I help you?\nType 'exit' to end the chat.")
     while True:
         user_prompt = input("\n[You]: ")
         if user_prompt.lower() == "exit":
