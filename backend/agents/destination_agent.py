@@ -23,7 +23,7 @@ destination_agent = Agent(
 async def main() -> None:
     session = OpenAIConversationsSession()
 
-    print("Hello, I am your personal travel agent. How can I help you?\nType 'exit' to end the chat.")
+    print("Hello, I am your personal destination agent. How can I help you?\nType 'exit' to end the chat.")
     while True:
         user_prompt = input("\n[You]: ")
         if user_prompt.lower() == "exit":
