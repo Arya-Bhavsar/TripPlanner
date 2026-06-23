@@ -1,6 +1,5 @@
-import asyncio
 import os
-from agents import Agent, Runner, OpenAIConversationsSession
+from agents import Agent
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -20,22 +19,22 @@ destination_agent = Agent(
     model=os.getenv("MODEL_NAME")
 )
 
-async def main() -> None:
-    session = OpenAIConversationsSession()
+# async def main() -> None:
+#     session = OpenAIConversationsSession()
 
-    print("Hello, I am your personal destination agent. How can I help you?\nType 'exit' to end the chat.")
-    while True:
-        user_prompt = input("\n[You]: ")
-        if user_prompt.lower() == "exit":
-            print("[Agent]: Safe travels!")
-            break
+#     print("Hello, I am your personal destination agent. How can I help you?\nType 'exit' to end the chat.")
+#     while True:
+#         user_prompt = input("\n[You]: ")
+#         if user_prompt.lower() == "exit":
+#             print("[Agent]: Safe travels!")
+#             break
 
-        result = await Runner.run(
-            destination_agent, 
-            user_prompt,
-            session=session
-        )
-        print("[Agent]:", result.final_output)
+#         result = await Runner.run(
+#             destination_agent, 
+#             user_prompt,
+#             session=session
+#         )
+#         print("[Agent]:", result.final_output)
 
-if __name__ == "__main__":
-    asyncio.run(main())
+# if __name__ == "__main__":
+#     asyncio.run(main())

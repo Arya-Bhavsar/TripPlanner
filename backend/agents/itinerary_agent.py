@@ -1,7 +1,6 @@
-import asyncio
 import os
 import httpx
-from agents import Agent, Runner, OpenAIConversationsSession, function_tool
+from agents import Agent, function_tool
 from agents.tool import WebSearchTool
 from dotenv import load_dotenv
 
@@ -87,22 +86,22 @@ itinerary_agent = Agent(
     ]
 )
 
-async def main() -> None:
-    session = OpenAIConversationsSession()
+# async def main() -> None:
+#     session = OpenAIConversationsSession()
 
-    print("Hello, I am your personal itinerary agent. How can I help you?\nType 'exit' to end the chat.")
-    while True:
-        user_prompt = input("\n[You]: ")
-        if user_prompt.lower() == "exit":
-            print("[Agent]: Safe travels!")
-            break
+#     print("Hello, I am your personal itinerary agent. How can I help you?\nType 'exit' to end the chat.")
+#     while True:
+#         user_prompt = input("\n[You]: ")
+#         if user_prompt.lower() == "exit":
+#             print("[Agent]: Safe travels!")
+#             break
 
-        result = await Runner.run(
-            itinerary_agent,
-            user_prompt,
-            session=session
-        )
-        print("[Agent]:", result.final_output)
+#         result = await Runner.run(
+#             itinerary_agent,
+#             user_prompt,
+#             session=session
+#         )
+#         print("[Agent]:", result.final_output)
 
-if __name__ == "__main__":
-    asyncio.run(main())
+# if __name__ == "__main__":
+#     asyncio.run(main())
