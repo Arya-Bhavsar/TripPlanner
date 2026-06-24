@@ -1,10 +1,10 @@
 import os
-from agents import Agent, Runner, OpenAIConversationsSession
+from agents import Agent
 from dotenv import load_dotenv
 
 load_dotenv()
 
-aggregator_instructions = """
+aggregator_agent_instructions = """
 ### ROLE
 You are the Aggregator Agent, the executive editor and final touchpoint of the travel framework. Your purpose is to synthesize the final outputs from the Itinerary, Stay, and Budget Agents into a cohesive, professional Master Travel Dossier.
 
@@ -27,8 +27,9 @@ Your final response must strictly adhere to this clean Markdown hierarchy:
 - Keep the user experience seamless: do not ask follow-up questions or request further iterations once you deliver the dossier.
 """
 
-aggregator = Agent(
+aggregator_agent = Agent(
     name="Aggregator",
-    instructions=aggregator_instructions,
-    model=os.getenv("MODEL_NAME")
+    instructions=aggregator_agent_instructions,
+    model=os.getenv("MODEL_NAME"),
+    handoff_description="Call this final agent only after the user approves the budget audit, confirming they are ready to compile all finalized transit, lodging, and itinerary data into the Master Travel Dossier."
 )

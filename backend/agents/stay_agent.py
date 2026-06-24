@@ -27,7 +27,8 @@ stay_agent = Agent(
     name="Stay Agent",
     instructions=stay_agent_instructions,
     model=os.getenv("MODEL_NAME"),
-    tools=[WebSearchTool()]
+    tools=[WebSearchTool()],
+    handoff_description="Call this agent when a destination is selected and the user needs to find lodging, research hotels, check Airbnb availability, or pick accommodations."
 )
 
 # async def main() -> None:

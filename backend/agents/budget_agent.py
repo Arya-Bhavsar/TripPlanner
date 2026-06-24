@@ -28,7 +28,8 @@ You are the Budget Agent, the financial anchor and cost optimizer of this travel
 budget_agent = Agent(
     name="Budget Agent",
     instructions=budget_agent_instructions,
-    model=os.getenv("MODEL_NAME")
+    model=os.getenv("MODEL_NAME"),
+    handoff_description="Call this financial advisor agent when the user wants to audit their trip costs, set a budget ceiling, check itemized ledger totals, or optimize expenses."
 )
 
 # async def main() -> None:

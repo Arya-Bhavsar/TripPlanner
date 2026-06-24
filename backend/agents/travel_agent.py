@@ -26,7 +26,8 @@ travel_agent = Agent(
     name="Travel Agent",
     instructions=travel_agent_instructions,
     model=os.getenv("MODEL_NAME"),
-    tools=[WebSearchTool()]
+    tools=[WebSearchTool()],
+    handoff_description="Call this agent when a destination is selected and the user needs to research flights, transit routes, transport pricing, or long-distance logistics."
 )
 
 # async def main() -> None:

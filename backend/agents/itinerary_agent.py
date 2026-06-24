@@ -83,7 +83,8 @@ itinerary_agent = Agent(
     tools=[
         WebSearchTool(),
         get_destination_weather_for_dates,
-    ]
+    ],
+    handoff_description="Call this agent when a destination is selected and the user needs to plan day-by-day activities, or look up local attractions."
 )
 
 # async def main() -> None:
