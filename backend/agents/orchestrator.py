@@ -8,18 +8,18 @@ from itinerary_agent import itinerary_agent
 from budget_agent import budget_agent
 from aggregator_agent import aggregator_agent
 
-destination_agent.handoffs = [travel_agent, stay_agent, itinerary_agent]
-travel_agent.handoffs = [budget_agent]
-stay_agent.handoffs = [budget_agent]
+destination_agent.handoffs = [travel_agent]
+travel_agent.handoffs = [stay_agent]
+stay_agent.handoffs = [itinerary_agent]
 itinerary_agent.handoffs = [budget_agent]
 budget_agent.handoffs = [aggregator_agent]
 
 async def main():
     session = OpenAIConversationsSession()
 
-    print("================================")
+    print("=====================================")
     print("AI Trip Planner")
-    print("================================")
+    print("=====================================")
     print("Type 'exit' to quit.\n")
 
     active_agent = destination_agent
@@ -35,10 +35,10 @@ async def main():
             user_prompt,
             session=session
         )
-        print(f"[Agent]: {result.final_output}")
+        print(f"[{active_agent.name}]: {result.final_output}")
 
         if result.last_agent.name != active_agent.name:
-            print(f"[HANDOFF]: {active_agent.name} -> {result.last_agent.name}")
+            print(f"\n[HANDOFF]: {active_agent.name} -> {result.last_agent.name}")
 
         active_agent = result.last_agent
 
