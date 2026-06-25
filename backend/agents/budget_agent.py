@@ -31,10 +31,10 @@ As soon as the user finalizes the plan, budget and cost, you MUST handoff the co
 """
 
 budget_agent = Agent(
-    name="Budget Agent",
-    instructions=budget_agent_instructions,
-    model=os.getenv("MODEL_NAME"),
-    handoff_description="Call this financial advisor agent when the user wants to audit their trip costs, set a budget ceiling, check itemized ledger totals, or optimize expenses."
+   name="Budget Agent",
+   instructions=budget_agent_instructions,
+   model=os.getenv("MODEL_NAME"),
+   handoff_description="Call this financial advisor agent when the user wants to audit their trip costs, set a budget ceiling, check itemized ledger totals, or optimize expenses."
 )
 
 # async def main() -> None:
