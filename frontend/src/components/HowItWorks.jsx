@@ -18,6 +18,8 @@ export default function HowItWorks() {
         <br />
         Organize your entire next trip all in one place.
       </p>
+
+      {/* Content */}
     </div>
   );
 }
