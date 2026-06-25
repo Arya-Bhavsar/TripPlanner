@@ -17,7 +17,7 @@
 
 /* Default Light Mode Variables */
 :root {
-  --page: #FAF7F0;
+  --page: #F7F3E5;
   --surface: #FAF7F0;
   --ink: #2A2724;
   --muted: #6B6358;
@@ -27,7 +27,7 @@
 
 /* Clear Dark Mode Class Overrides */
 html.dark {
-  --page: #222220;
+  --page: #1C1C1B;
   --surface: #222220;
   --ink: #E8E2D3;
   --muted: #A8A296;
