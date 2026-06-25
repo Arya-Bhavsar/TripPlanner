@@ -1,2 +1,42 @@
+/* frontend/src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400..600&family=Inter:wght@400;500;600&display=swap');
+
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-line: var(--line);
+
+  --font-display: 'Source Serif 4', serif;
+}
+
+/* Default Light Mode Variables */
+:root {
+  --page: #FAF7F0;
+  --surface: #FAF7F0;
+  --ink: #2A2724;
+  --muted: #6B6358;
+  --accent: #D97757;
+  --line: #E3DCCB;
+}
+
+/* Clear Dark Mode Class Overrides */
+html.dark {
+  --page: #222220;
+  --surface: #222220;
+  --ink: #E8E2D3;
+  --muted: #A8A296;
+  --accent: #E08363;
+  --line: #33312C;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--page);
+  color: var(--ink);
+}
