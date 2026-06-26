@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GlobeAmericas, Diagram3, ClipboardCheck } from 'react-bootstrap-icons';
+import { GlobeAmericas, Diagram3, ClipboardCheck, ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 
 export default function HorizontalStepper() {
   const [activeStep, setActiveStep] = useState(0);
@@ -55,19 +55,38 @@ export default function HorizontalStepper() {
       </div>
 
       {/* Dynamic Info Card */}
-      <div className="max-w-3xl mx-auto rounded-2xl border border-line bg-surface p-10 transition-all duration-300">
-        <div className="flex gap-8 items-start">
-          {/* Icon */}
-          {steps[activeStep].icon}
+      <div className="flex gap-8 items-start max-w-3xl mx-auto rounded-2xl border border-line bg-surface p-10 transition-all duration-300">
+        {/* Icon */}
+        {steps[activeStep].icon}
+
+        {/* Card Content */}
+        <div className="flex-1 w-full">
+          {/* Title */}
+          <div className="text-2xl font-display font-bold mb-3 text-ink">
+            {steps[activeStep].title}
+          </div>
 
           {/* Description */}
-          <div className="flex-1">
-            <div className="text-2xl font-display font-bold mb-3 text-ink">
-              {steps[activeStep].title}
-            </div>
-            <p className="text-sm leading-relaxed text-muted">
-              {steps[activeStep].description}
-            </p>
+          <p className="text-sm leading-relaxed text-muted">
+            {steps[activeStep].description}
+          </p>
+
+          {/* Navigation */}
+          <div className="flex items-center justify-end gap-4 pt-4">
+            <button
+              onClick={() => activeStep > 0 && setActiveStep(prev => prev - 1)}
+              disabled={activeStep === 0}
+              className="text-ink disabled:text-muted font-extrabold disabled:font-light"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => activeStep < steps.length - 1 && setActiveStep(prev => prev + 1)}
+              disabled={activeStep === steps.length - 1}
+              className="text-ink disabled:text-muted font-extrabold disabled:font-light"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </div>

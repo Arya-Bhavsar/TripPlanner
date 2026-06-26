@@ -7,7 +7,7 @@ export default function HowItWorks() {
       <Header />
 
       {/* Title */}
-      <div className="text-center mt-12 font-display font-medium text-8xl text-ink tracking-normal leading-[1.05] lowercase">
+      <div className="text-center mt-20 font-display font-medium text-8xl text-ink tracking-normal leading-[1.05] lowercase">
         travel planning,
         <br />
         made <span className="italic text-accent">smart</span>
