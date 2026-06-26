@@ -1,4 +1,5 @@
 import Header from "./Header";
+import HorizontalStepper from "./HorizontalStepper";
 
 export default function HowItWorks() {
   return (
@@ -6,7 +7,7 @@ export default function HowItWorks() {
       <Header />
 
       {/* Title */}
-      <div className="text-center mt-12 md:mt-20 font-display font-medium text-5xl md:text-8xl text-ink leading-[1.05] lowercase">
+      <div className="text-center mt-12 font-display font-medium text-8xl text-ink tracking-normal leading-[1.05] lowercase">
         travel planning,
         <br />
         made <span className="italic text-accent">smart</span>
@@ -19,7 +20,13 @@ export default function HowItWorks() {
         Organize your entire next trip all in one place.
       </p>
 
-      {/* Content */}
+      {/* Content Header */}
+      <div className="text-center mt-22 font-display font-extrabold tracking-wide text-6xl text-ink">
+        Plan the{" "}<span className="italic text-accent">Entire</span>{" "}Trip from Stratch
+      </div>
+
+      {/* Horizontal Stepper */}
+      <HorizontalStepper />
     </div>
   );
 }

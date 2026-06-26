@@ -22,7 +22,7 @@
   --ink: #2A2724;
   --muted: #6B6358;
   --accent: #D97757;
-  --line: #E3DCCB;
+  --line: #D1C8B1;
 }
 
 /* Clear Dark Mode Class Overrides */
@@ -32,7 +32,7 @@ html.dark {
   --ink: #E8E2D3;
   --muted: #A8A296;
   --accent: #E08363;
-  --line: #33312C;
+  --line: #423F3A;
 }
 
 body {
