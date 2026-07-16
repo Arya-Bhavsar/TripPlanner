@@ -5,22 +5,34 @@ export default function VerticalStepper() {
 
   const steps = [
     {
-      number: "01"
+      number: "01",
+      title: "Find the Destination",
+      content: null
     },
     {
-      number: "02"
+      number: "02",
+      title: "Plan the Commute",
+      content: null
     },
     {
-      number: "03"
+      number: "03",
+      title: "Book Accommodations",
+      content: null
     },
     {
-      number: "04"
+      number: "04",
+      title: "Create the Itinerary",
+      content: null
     },
     {
-      number: "05"
+      number: "05",
+      title: "Optimize the Cost",
+      content: null
     },
     {
-      number: "06"
+      number: "06",
+      title: "The Final Plan",
+      content: null
     }
   ];
 
@@ -55,8 +67,13 @@ export default function VerticalStepper() {
         </div>
 
         {/* Content */}
-        <div className="flex-1 w-full">
-          {/* Code here */}
+        <div className="flex-1 w-full h-full overflow-y-auto pt-6">
+          {/* Title */}
+          <div className="text-center font-display font-medium text-5xl text-ink">
+            {steps[activeStep].title}
+          </div>
+
+          {/* Content */}
         </div>
       </div>
     </div>
