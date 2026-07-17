@@ -10,36 +10,12 @@ export default function VerticalStepper() {
   const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
-    {
-      number: "01",
-      title: "Find the Destination",
-      content: DestinationStep
-    },
-    {
-      number: "02",
-      title: "Plan the Transit",
-      content: TransitStep
-    },
-    {
-      number: "03",
-      title: "Book Accommodations",
-      content: AccommodationStep
-    },
-    {
-      number: "04",
-      title: "Create the Itinerary",
-      content: ItineraryStep
-    },
-    {
-      number: "05",
-      title: "Optimize the Cost",
-      content: CostStep
-    },
-    {
-      number: "06",
-      title: "The Final Plan",
-      content: FinalPlan
-    }
+    { number: "01", title: "Find the Destination", content: DestinationStep },
+    { number: "02", title: "Plan the Transit", content: TransitStep },
+    { number: "03", title: "Book Accommodations", content: AccommodationStep },
+    { number: "04", title: "Create the Itinerary", content: ItineraryStep },
+    { number: "05", title: "Optimize the Cost", content: CostStep },
+    { number: "06", title: "The Final Plan", content: FinalPlan }
   ];
 
   const ActiveStepContent = steps[activeStep].content;
