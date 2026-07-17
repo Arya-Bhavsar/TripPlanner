@@ -1,4 +1,10 @@
 import { useState } from 'react';
+import DestinationStep from './DestinationStep';
+import TransitStep from './TransitStep';
+import AccommodationStep from './AccommodationStep';
+import ItineraryStep from './ItineraryStep';
+import CostStep from './CostStep';
+import FinalPlan from './FinalPlan';
 
 export default function VerticalStepper() {
   const [activeStep, setActiveStep] = useState(0);
@@ -7,37 +13,39 @@ export default function VerticalStepper() {
     {
       number: "01",
       title: "Find the Destination",
-      content: null
+      content: DestinationStep
     },
     {
       number: "02",
-      title: "Plan the Commute",
-      content: null
+      title: "Plan the Transit",
+      content: TransitStep
     },
     {
       number: "03",
       title: "Book Accommodations",
-      content: null
+      content: AccommodationStep
     },
     {
       number: "04",
       title: "Create the Itinerary",
-      content: null
+      content: ItineraryStep
     },
     {
       number: "05",
       title: "Optimize the Cost",
-      content: null
+      content: CostStep
     },
     {
       number: "06",
       title: "The Final Plan",
-      content: null
+      content: FinalPlan
     }
   ];
 
+  const ActiveStepContent = steps[activeStep].content;
+
   return (
-    <div className="w-full h-full max-w-7xl mx-auto px-6 pb-6">
+    <div className="w-full h-full max-w-7xl mx-auto pb-6">
       <div className="flex flex-row gap-12 items-start h-full">
         {/* Vertical Stepper */}
         <div className="shrink-0 flex flex-col justify-between h-full py-4 min-h-100">
@@ -74,6 +82,7 @@ export default function VerticalStepper() {
           </div>
 
           {/* Content */}
+          <ActiveStepContent />
         </div>
       </div>
     </div>
