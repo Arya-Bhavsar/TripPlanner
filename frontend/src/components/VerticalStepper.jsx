@@ -35,6 +35,7 @@ export default function VerticalStepper() {
                 <button
                   onClick={() => setActiveStep(index)}
                   className="flex items-center gap-2 group focus:outline-none cursor-pointer"
+                // disabled={!isPast && !isActive}
                 >
                   <span className={`text-2xl font-display transition-colors duration-300 ${isPast || isActive ? "text-accent" : "text-muted group-hover:text-ink"}`}>
                     {step.number}
