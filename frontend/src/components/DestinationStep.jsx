@@ -4,9 +4,14 @@ import { Search } from 'react-bootstrap-icons';
 export default function DestinationStep() {
   const [destinationInput, setDestinationInput] = useState('');
 
+  const handleSearch = () => {
+    console.log("Destination input:", destinationInput);
+    setDestinationInput("");
+  }
+
   const handleKeyDown = (e) => {
     if (e.key == "Enter" && destinationInput.trim() !== "") {
-      // Code here
+      handleSearch();
     }
   };
 
@@ -26,6 +31,7 @@ export default function DestinationStep() {
         />
         <button
           disabled={isEmpty}
+          onClick={handleSearch}
           className={`absolute right-5 top-1/2 -translate-y-1/2 ${isEmpty ? "text-muted" : "text-accent"} font-extrabold text-xl hover:cursor-pointer transition-all duration-300`}
         >
           <Search />
