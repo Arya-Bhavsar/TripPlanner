@@ -6,7 +6,7 @@ import ItineraryStep from './ItineraryStep';
 import CostStep from './CostStep';
 import FinalPlan from './FinalPlan';
 
-export default function VerticalStepper() {
+export default function TripPlannerWizard() {
   const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
