@@ -52,14 +52,16 @@ export default function TripPlannerWizard() {
         </div>
 
         {/* Content */}
-        <div className="flex-1 w-full h-full overflow-y-auto pt-6">
+        <div className="flex-1 w-full h-full flex flex-col overflow-hidden pt-6">
           {/* Title */}
-          <div className="text-center font-display font-medium text-5xl text-ink">
+          <div className="text-center flex-none font-display font-medium text-5xl text-ink">
             {steps[activeStep].title}
           </div>
 
           {/* Content */}
-          <ActiveStepContent />
+          <div className="flex-1 min-h-0">
+            <ActiveStepContent />
+          </div>
         </div>
       </div>
     </div>

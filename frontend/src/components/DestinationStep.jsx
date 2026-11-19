@@ -18,7 +18,7 @@ export default function DestinationStep() {
   const isEmpty = destinationInput.trim() === "";
 
   return (
-    <div className="flex p-4 mt-2 items-center justify-center">
+    <div className="flex h-full min-h-0 flex-col items-center p-4 mt-2 overflow-hidden">
       {/* Destination Input */}
       <div className="relative w-full max-w-3xl">
         <input
@@ -37,6 +37,57 @@ export default function DestinationStep() {
           <Search />
         </button>
       </div>
-    </div >
+
+      {/* Scrollable Destination Cards */}
+      <div className="grid grid-cols-3 gap-8 mt-8 w-full min-h-0 flex-1 overflow-y-auto px-4 pb-4">
+        {/* Destination 1 */}
+        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line">
+          {/* Image placeholder */}
+          <div className="h-60 w-full rounded-xl bg-line"></div>
+          <div className="text-lg font-medium text-ink">Destination 1</div>
+          <div className="text-sm text-muted">Description of Destination 1</div>
+        </div>
+
+        {/* Destination 2 */}
+        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line">
+          {/* Image placeholder */}
+          <div className="h-60 w-full rounded-xl bg-line"></div>
+          <div className="text-lg font-medium text-ink">Destination 2</div>
+          <div className="text-sm text-muted">Description of Destination 2</div>
+        </div>
+
+        {/* Destination 3 */}
+        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line">
+          {/* Image placeholder */}
+          <div className="h-60 w-full rounded-xl bg-line"></div>
+          <div className="text-lg font-medium text-ink">Destination 3</div>
+          <div className="text-sm text-muted">Description of Destination 3</div>
+        </div>
+
+        {/* Destination 4 */}
+        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line">
+          {/* Image placeholder */}
+          <div className="h-60 w-full rounded-xl bg-line"></div>
+          <div className="text-lg font-medium text-ink">Destination 4</div>
+          <div className="text-sm text-muted">Description of Destination 4</div>
+        </div>
+
+        {/* Destination 5 */}
+        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line">
+          {/* Image placeholder */}
+          <div className="h-60 w-full rounded-xl bg-line"></div>
+          <div className="text-lg font-medium text-ink">Destination 5</div>
+          <div className="text-sm text-muted">Description of Destination 5</div>
+        </div>
+
+        {/* Destination 6 */}
+        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line">
+          {/* Image placeholder */}
+          <div className="h-60 w-full rounded-xl bg-line"></div>
+          <div className="text-lg font-medium text-ink">Destination 6</div>
+          <div className="text-sm text-muted">Description of Destination 6</div>
+        </div>
+      </div>
+    </div>
   );
 }
