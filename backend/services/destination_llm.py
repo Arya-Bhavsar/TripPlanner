@@ -47,9 +47,3 @@ def find_destinations(user_prompt: str) -> DestinationList:
         HumanMessage(content=user_prompt)
     ]
     return structured_llm.invoke(messages)
-
-user_prompt = "I'm looking for a travel destination that offers a mix of adventure and relaxation, with beautiful landscapes and cultural experiences. I want to avoid overly touristy spots and prefer places that are off the beaten path."
-
-# Test for the destination llm call
-# dests = find_destinations(user_prompt)
-# print(dests.model_dump_json(indent=2))
