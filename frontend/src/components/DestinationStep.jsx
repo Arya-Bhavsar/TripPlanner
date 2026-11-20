@@ -26,7 +26,7 @@ export default function DestinationStep() {
           onChange={(e) => setDestinationInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Describe your ideal destination, and we'll find the perfect match for you."
-          className="w-full py-4 pl-4 pr-13 bg-surface rounded-full border border-line focus:outline-none focus:border-none focus:ring-2 focus:ring-accent"
+          className="w-full py-4 pl-4 pr-13 bg-surface rounded-full border border-line focus:outline-none focus:ring-2 focus:ring-accent"
         />
         <button
           disabled={isEmpty}
