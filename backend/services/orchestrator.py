@@ -1,7 +1,7 @@
 import asyncio
 from agents import Runner, OpenAIConversationsSession
 
-from destination_agent import destination_agent
+from backend.services.destination_llm import destination_agent
 from travel_agent import travel_agent
 from stay_agent import stay_agent
 from itinerary_agent import itinerary_agent
