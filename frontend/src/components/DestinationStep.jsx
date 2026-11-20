@@ -6,8 +6,7 @@ export default function DestinationStep() {
 
   const handleSearch = () => {
     console.log("Destination input:", destinationInput);
-    setDestinationInput("");
-  }
+  };
 
   const handleKeyDown = (e) => {
     if (e.key == "Enter" && destinationInput.trim() !== "") {
@@ -27,7 +26,7 @@ export default function DestinationStep() {
           onChange={(e) => setDestinationInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Describe your ideal destination, and we'll find the perfect match for you."
-          className="w-full p-4 bg-surface rounded-full border border-line focus:outline-none focus:border-none focus:ring-2 focus:ring-accent"
+          className="w-full py-4 pl-4 pr-13 bg-surface rounded-full border border-line focus:outline-none focus:border-none focus:ring-2 focus:ring-accent"
         />
         <button
           disabled={isEmpty}
@@ -39,9 +38,9 @@ export default function DestinationStep() {
       </div>
 
       {/* Scrollable Destination Cards */}
-      <div className="grid grid-cols-3 gap-8 mt-8 w-full min-h-0 flex-1 overflow-y-auto px-4 pb-4">
+      <div className="grid grid-cols-3 gap-8 mt-8 w-full min-h-0 flex-1 overflow-y-auto px-4 pb-4 pt-1">
         {/* Destination 1 */}
-        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line">
+        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300">
           {/* Image placeholder */}
           <div className="h-60 w-full rounded-xl bg-line"></div>
           <div className="text-lg font-medium text-ink">Destination 1</div>
@@ -49,7 +48,7 @@ export default function DestinationStep() {
         </div>
 
         {/* Destination 2 */}
-        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line">
+        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300">
           {/* Image placeholder */}
           <div className="h-60 w-full rounded-xl bg-line"></div>
           <div className="text-lg font-medium text-ink">Destination 2</div>
@@ -57,7 +56,7 @@ export default function DestinationStep() {
         </div>
 
         {/* Destination 3 */}
-        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line">
+        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300">
           {/* Image placeholder */}
           <div className="h-60 w-full rounded-xl bg-line"></div>
           <div className="text-lg font-medium text-ink">Destination 3</div>
@@ -65,7 +64,7 @@ export default function DestinationStep() {
         </div>
 
         {/* Destination 4 */}
-        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line">
+        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300">
           {/* Image placeholder */}
           <div className="h-60 w-full rounded-xl bg-line"></div>
           <div className="text-lg font-medium text-ink">Destination 4</div>
@@ -73,7 +72,7 @@ export default function DestinationStep() {
         </div>
 
         {/* Destination 5 */}
-        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line">
+        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300">
           {/* Image placeholder */}
           <div className="h-60 w-full rounded-xl bg-line"></div>
           <div className="text-lg font-medium text-ink">Destination 5</div>
@@ -81,7 +80,7 @@ export default function DestinationStep() {
         </div>
 
         {/* Destination 6 */}
-        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line">
+        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300">
           {/* Image placeholder */}
           <div className="h-60 w-full rounded-xl bg-line"></div>
           <div className="text-lg font-medium text-ink">Destination 6</div>
