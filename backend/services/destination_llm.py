@@ -1,45 +1,55 @@
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import SystemMessage, HumanMessage
+from pydantic import BaseModel, Field
 import os
-from agents import Agent
 from dotenv import load_dotenv
 
 load_dotenv()
 
-dest_agent_instructions = """
-### ROLE
-You are the Destination Agent, an expert travel matcher. 
-Your sole purpose is to consider user travel preferences and recommend 3 to 5 specific geographic destinations and help them narrow down to one that perfectly match their criteria.
+instructions = """
+You are a travel expert helping users discover destinations. Based on the user's preferences, vibe, or description, suggest 5 to 10 distinct, realistic destinations that fit what they are looking for.
 
-### CRITICAL TRANSFER RULE
-As soon as the user confirms a destination and their travel dates for the trip, you MUST handoff the conversation to the Travel Agent.
-- EXPLICITLY ASK the user for permission to transfer.
-- Simply trigger the handoff quietly in the background as your very next action.
-
-### CRITICAL GUARDRAILS
-NEVER build daily itineraries, calculate specific budget breakdowns, or recommend specific hotels/flights. Only recommend cities, or countries.
+Guidelines:
+- Always return between 5 and 10 destinations.
+- Offer a diverse mix of places while staying true to the user's intent.
+- Keep descriptions concise and engaging so they fit cleanly on a discovery card.
+- Suggest real places only and avoid guessing live prices or current availability.
+- If the request is broad or minimal, curate a strong variety of popular and hidden-gem options rather than asking clarifying questions.
 """
 
-destination_agent = Agent(
-    name="Destination Agent",
-    instructions=dest_agent_instructions,
-    model=os.getenv("MODEL_NAME")
-)
+# Output Schema for the destination llm call
+class DestinationDetails(BaseModel):
+    name: str = Field(description="City, region, or primary destination name")
+    country: str = Field(description="Country where the destination is located")
+    tagline: str = Field(description="Short punchy 4-8 word hook for the card header")
+    summary: str = Field(description="Concise 1-2 sentence overview tailored to the user's vibe and preferences")
+    best_season: str = Field(description="Ideal time of year to visit (e.g., 'Spring & Autumn')")
+    tags: list[str] = Field(
+        min_length=2,
+        max_length=3,
+        description="2-3 short scannable vibe/activity badges (e.g., ['Culture', 'Food', 'Temples'])",
+    )
 
-# async def main() -> None:
-#     session = OpenAIConversationsSession()
+class DestinationList(BaseModel):
+    destinations: list[DestinationDetails] = Field(
+        min_length=5,
+        max_length=10,
+        description="List of 5 to 10 recommended destinations based on the user's preferences, vibe, or description"
+    )
 
-#     print("Hello, I am your personal destination agent. How can I help you?\nType 'exit' to end the chat.")
-#     while True:
-#         user_prompt = input("\n[You]: ")
-#         if user_prompt.lower() == "exit":
-#             print("[Agent]: Safe travels!")
-#             break
+llm = ChatOpenAI(model_name=os.getenv("MODEL_NAME"))
+structured_llm = llm.with_structured_output(DestinationList)
 
-#         result = await Runner.run(
-#             destination_agent, 
-#             user_prompt,
-#             session=session
-#         )
-#         print("[Agent]:", result.final_output)
+# Invokes the llm to find destination based on the user's prompt
+def find_destinations(user_prompt: str) -> DestinationList:
+    messages = [
+        SystemMessage(content=instructions),
+        HumanMessage(content=user_prompt)
+    ]
+    return structured_llm.invoke(messages)
 
-# if __name__ == "__main__":
-#     asyncio.run(main())
+user_prompt = "I'm looking for a travel destination that offers a mix of adventure and relaxation, with beautiful landscapes and cultural experiences. I want to avoid overly touristy spots and prefer places that are off the beaten path."
+
+# Test for the destination llm call
+# dests = find_destinations(user_prompt)
+# print(dests.model_dump_json(indent=2))
