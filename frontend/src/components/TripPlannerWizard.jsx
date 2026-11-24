@@ -6,9 +6,10 @@ import ItineraryStep from './ItineraryStep';
 import CostStep from './CostStep';
 import FinalPlan from './FinalPlan';
 
-export default function TripPlannerWizard() {
-  const [activeStep, setActiveStep] = useState(0);
-
+export default function TripPlannerWizard({
+  activeStep,
+  setActiveStep
+}) {
   const steps = [
     { number: "01", title: "Find the Destination", content: DestinationStep },
     { number: "02", title: "Plan the Transit", content: TransitStep },

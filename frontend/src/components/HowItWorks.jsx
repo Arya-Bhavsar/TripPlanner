@@ -3,11 +3,9 @@ import HorizontalStepper from "./HorizontalStepper";
 
 export default function HowItWorks() {
   return (
-    <div className="h-screen max-h-screen flex flex-col p-4 min-w-0 max-w-7xl w-full mx-auto bg-page">
-      <Header />
-
+    <div className="w-full h-full max-w-7xl mx-auto">
       {/* Title */}
-      <div className="text-center mt-10 font-display font-medium text-8xl text-ink tracking-normal leading-[1.05] lowercase">
+      <div className="text-center font-display font-medium text-8xl text-ink tracking-normal leading-[1.05] lowercase">
         travel planning,
         <br />
         made <span className="italic text-accent">smart</span>
