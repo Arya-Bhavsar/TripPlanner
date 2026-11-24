@@ -8,7 +8,13 @@ import FinalPlan from './FinalPlan';
 
 export default function TripPlannerWizard({
   activeStep,
-  setActiveStep
+  setActiveStep,
+  destinationInput,
+  setDestinationInput,
+  destinations,
+  setDestinations,
+  images,
+  setImages,
 }) {
   const steps = [
     { number: "01", title: "Find the Destination", content: DestinationStep },
@@ -20,6 +26,15 @@ export default function TripPlannerWizard({
   ];
 
   const ActiveStepContent = steps[activeStep].content;
+
+  const stepProps = {
+    destinationInput,
+    setDestinationInput,
+    destinations,
+    setDestinations,
+    images,
+    setImages,
+  };
 
   return (
     <div className="w-full h-full max-w-7xl mx-auto pb-6">
@@ -61,7 +76,7 @@ export default function TripPlannerWizard({
 
           {/* Content */}
           <div className="flex-1 min-h-0">
-            <ActiveStepContent />
+            <ActiveStepContent {...stepProps} />
           </div>
         </div>
       </div>

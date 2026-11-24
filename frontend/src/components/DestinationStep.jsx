@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { Search } from 'react-bootstrap-icons';
 import api from '../axios';
 
-export default function DestinationStep() {
-  const [destinationInput, setDestinationInput] = useState('');
-  const [destinations, setDestinations] = useState([]);
-  const [images, setImages] = useState({});
+export default function DestinationStep({
+  destinationInput,
+  setDestinationInput,
+  destinations,
+  setDestinations,
+  images,
+  setImages,
+}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -23,6 +27,7 @@ export default function DestinationStep() {
       const { data } = await api.post('/destinations', { prompt: query });
       const destList = data.destinations;
       setDestinations(destList);
+      console.log(destinations)
 
       const names = destList.map(dest => dest.name).filter(Boolean);
       if (names.length) {
@@ -97,7 +102,7 @@ export default function DestinationStep() {
               ) : (
                 <div className="h-60 w-full rounded-xl bg-line" />
               )}
-              <div className="text-lg font-medium text-ink">{dest.name}</div>
+              <div className="text-lg font-medium text-ink">{dest.name + ", " + dest.country}</div>
               <div className="text-sm text-muted">{dest.tagline}</div>
             </div>
           );
