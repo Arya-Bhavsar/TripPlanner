@@ -1,11 +1,41 @@
 import { useState } from 'react';
 import { Search } from 'react-bootstrap-icons';
+import api from '../axios';
 
 export default function DestinationStep() {
   const [destinationInput, setDestinationInput] = useState('');
+  const [destinations, setDestinations] = useState([]);
+  const [images, setImages] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     console.log("Destination input:", destinationInput);
+
+    const query = destinationInput.trim();
+    if (!query || loading) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Make an API call to fetch destinations based on the input
+      const { data } = await api.post('/destinations', { prompt: query });
+      const destList = data.destinations;
+      setDestinations(destList);
+
+      const names = destList.map(dest => dest.name).filter(Boolean);
+      if (names.length) {
+        const res = await api.post('/destinations/images', { destinations: names });
+        setImages(res.data.results);
+        console.log("Fetched images:", res.data.results);
+      }
+    } catch (err) {
+      console.error(err);
+      setError('An error occurred while fetching destinations. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -37,55 +67,41 @@ export default function DestinationStep() {
         </button>
       </div>
 
+      {/* Loading and Error Messages */}
+      {loading && (
+        <div className="flex items-center justify-center gap-3 mt-8 text-muted">
+          <div className="animate-spin rounded-full h-6 w-6 border-2 border-line border-t-accent" />
+          <span>Finding destinations...</span>
+        </div>
+      )}
+      {error && (
+        <p className="mt-4 text-sm text-red-500">{error}</p>
+      )}
+
       {/* Scrollable Destination Cards */}
       <div className="grid grid-cols-3 gap-8 mt-8 w-full min-h-0 flex-1 overflow-y-auto px-4 pb-4 pt-1">
-        {/* Destination 1 */}
-        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300">
-          {/* Image placeholder */}
-          <div className="h-60 w-full rounded-xl bg-line"></div>
-          <div className="text-lg font-medium text-ink">Destination 1</div>
-          <div className="text-sm text-muted">Description of Destination 1</div>
-        </div>
+        {destinations.map((dest, index) => {
+          const imageUrl = images[dest.name]?.[0] || '';
 
-        {/* Destination 2 */}
-        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300">
-          {/* Image placeholder */}
-          <div className="h-60 w-full rounded-xl bg-line"></div>
-          <div className="text-lg font-medium text-ink">Destination 2</div>
-          <div className="text-sm text-muted">Description of Destination 2</div>
-        </div>
-
-        {/* Destination 3 */}
-        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300">
-          {/* Image placeholder */}
-          <div className="h-60 w-full rounded-xl bg-line"></div>
-          <div className="text-lg font-medium text-ink">Destination 3</div>
-          <div className="text-sm text-muted">Description of Destination 3</div>
-        </div>
-
-        {/* Destination 4 */}
-        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300">
-          {/* Image placeholder */}
-          <div className="h-60 w-full rounded-xl bg-line"></div>
-          <div className="text-lg font-medium text-ink">Destination 4</div>
-          <div className="text-sm text-muted">Description of Destination 4</div>
-        </div>
-
-        {/* Destination 5 */}
-        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300">
-          {/* Image placeholder */}
-          <div className="h-60 w-full rounded-xl bg-line"></div>
-          <div className="text-lg font-medium text-ink">Destination 5</div>
-          <div className="text-sm text-muted">Description of Destination 5</div>
-        </div>
-
-        {/* Destination 6 */}
-        <div className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300">
-          {/* Image placeholder */}
-          <div className="h-60 w-full rounded-xl bg-line"></div>
-          <div className="text-lg font-medium text-ink">Destination 6</div>
-          <div className="text-sm text-muted">Description of Destination 6</div>
-        </div>
+          return (
+            <div
+              key={index}
+              className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300"
+            >
+              {imageUrl ? (
+                <img
+                  src={imageUrl}
+                  alt={dest.name}
+                  className="h-60 w-full rounded-xl object-cover"
+                />
+              ) : (
+                <div className="h-60 w-full rounded-xl bg-line" />
+              )}
+              <div className="text-lg font-medium text-ink">{dest.name}</div>
+              <div className="text-sm text-muted">{dest.tagline}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
