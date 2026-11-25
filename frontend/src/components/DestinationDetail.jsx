@@ -22,6 +22,7 @@ export default function DestinationDetail({
     <div className="flex flex-col gap-5">
       {/* Carousel */}
       <div className="relative h-64 w-full overflow-hidden rounded-xl border border-line bg-page">
+        {/* Images */}
         {count > 0 ? (
           <img
             src={imageList[current]}
@@ -34,6 +35,7 @@ export default function DestinationDetail({
           </div>
         )}
 
+        {/* Navigation */}
         {count > 1 && (
           <>
             <button
@@ -63,12 +65,8 @@ export default function DestinationDetail({
 
       {/* Summary */}
       <div className="space-y-1">
-        {destination.tagline && (
-          <p className="text-sm font-medium text-accent">{destination.tagline}</p>
-        )}
-        <p className="text-sm leading-relaxed text-muted">
-          {destination.summary}
-        </p>
+        <p className="text-sm font-medium text-accent">{destination.tagline}</p>
+        <p className="text-sm leading-relaxed text-muted">{destination.summary}</p>
       </div>
 
       {/* Tags */}
@@ -88,7 +86,6 @@ export default function DestinationDetail({
       {/* Select Button */}
       <div className="flex justify-end border-t border-line pt-4">
         <button
-          type="button"
           onClick={onSelect}
           className={`inline-flex cursor-pointer items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold ${isSelected
             ? "border border-accent bg-accent/15 text-accent"
