@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Search } from 'react-bootstrap-icons';
+import { Search, CheckCircleFill } from 'react-bootstrap-icons';
 import api from '../axios';
+import Modal from './Modal';
+import DestinationDetail from './DestinationDetail';
 
 export default function DestinationStep({
   destinationInput,
@@ -9,9 +11,12 @@ export default function DestinationStep({
   setDestinations,
   images,
   setImages,
+  selectedDestination,
+  setSelectedDestination,
 }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [previewDest, setPreviewDest] = useState(null);
 
   const handleSearch = async () => {
     console.log("Destination input:", destinationInput);
@@ -47,6 +52,14 @@ export default function DestinationStep({
     if (e.key == "Enter" && destinationInput.trim() !== "") {
       handleSearch();
     }
+  };
+
+  const handleSelectDestination = () => {
+    if (!previewDest) return;
+
+    const alreadySelected = selectedDestination?.name === previewDest.name
+    setSelectedDestination(alreadySelected ? null : previewDest);
+    setPreviewDest(null);
   };
 
   const isEmpty = destinationInput.trim() === "";
@@ -87,27 +100,55 @@ export default function DestinationStep({
       <div className="grid grid-cols-3 gap-8 mt-8 w-full min-h-0 flex-1 overflow-y-auto px-4 pb-4 pt-1">
         {destinations.map((dest, index) => {
           const imageUrl = images[dest.name]?.[0] || '';
+          const isChosen = selectedDestination?.name === dest.name
 
           return (
             <div
               key={index}
-              className="flex flex-col gap-2 p-4 bg-surface rounded-2xl border border-line hover:ring-2 hover:ring-accent transition-all duration-300"
+              onClick={() => setPreviewDest(dest)}
+              className={`flex flex-col gap-2 p-4 bg-surface rounded-2xl border cursor-pointer transition-all duration-300 ${isChosen ? "border-accent ring-2 ring-accent" : "border-line hover:ring-2 hover:ring-accent"}`}
             >
-              {imageUrl ? (
-                <img
-                  src={imageUrl}
-                  alt={dest.name}
-                  className="h-60 w-full rounded-xl object-cover"
-                />
-              ) : (
-                <div className="h-60 w-full rounded-xl bg-line" />
-              )}
-              <div className="text-lg font-medium text-ink">{dest.name + ", " + dest.country}</div>
+              <div className="relative">
+                {imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt={dest.name}
+                    className="h-60 w-full rounded-xl object-cover"
+                  />
+                ) : (
+                  <div className="h-60 w-full rounded-xl bg-line" />
+                )}
+
+                {isChosen && (
+                  <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface/90 border border-accent text-xs font-medium text-accent">
+                    <CheckCircleFill className="w-3.5 h-3.5" />
+                    Selected
+                  </span>
+                )}
+              </div>
+              <div className="text-lg font-medium text-ink">{`${dest.name}, ${dest.country}`}</div>
               <div className="text-sm text-muted">{dest.tagline}</div>
             </div>
           );
         })}
       </div>
+
+      {/* Destination Details Modal */}
+      <Modal
+        isOpen={Boolean(previewDest)}
+        onClose={() => setPreviewDest(null)}
+        title={previewDest ? `${previewDest.name}, ${previewDest.country}` : ""}
+      >
+        <DestinationDetail
+          key={previewDest?.name}
+          destination={previewDest}
+          images={previewDest ? images[previewDest.name] : []}
+          isSelected={Boolean(
+            previewDest && selectedDestination?.name === previewDest.name
+          )}
+          onSelect={handleSelectDestination}
+        />
+      </Modal>
     </div>
   );
 }

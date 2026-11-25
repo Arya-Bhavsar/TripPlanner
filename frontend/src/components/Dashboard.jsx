@@ -11,6 +11,7 @@ export default function Dashboard() {
   const [destinationInput, setDestinationInput] = useState('');
   const [destinations, setDestinations] = useState([]);
   const [images, setImages] = useState({});
+  const [selectedDestination, setSelectedDestination] = useState(null);
 
   return (
     <div className="h-screen max-h-screen flex flex-col p-4 min-w-0 max-w-7xl w-full mx-auto bg-page">
@@ -32,6 +33,8 @@ export default function Dashboard() {
             setDestinations={setDestinations}
             images={images}
             setImages={setImages}
+            selectedDestination={selectedDestination}
+            setSelectedDestination={setSelectedDestination}
           />
         ) : (
           <HowItWorks />

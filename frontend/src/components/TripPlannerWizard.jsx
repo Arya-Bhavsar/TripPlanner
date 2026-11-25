@@ -15,6 +15,8 @@ export default function TripPlannerWizard({
   setDestinations,
   images,
   setImages,
+  selectedDestination,
+  setSelectedDestination,
 }) {
   const steps = [
     { number: "01", title: "Find the Destination", content: DestinationStep },
@@ -34,6 +36,8 @@ export default function TripPlannerWizard({
     setDestinations,
     images,
     setImages,
+    selectedDestination,
+    setSelectedDestination,
   };
 
   return (
